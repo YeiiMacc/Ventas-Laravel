@@ -17,11 +17,19 @@ class ProductController extends Controller
 
     public function create() 
     {
-        return 'This is the form to create a product';
+        return view('products.create');
     }
     public function store() 
     {
-        //
+        // $product = Product::create([
+        //     'title' => request()->title,
+        //     'description' =>request()->description,
+        //     'price' =>request()->price,
+        //     'stock' =>request()->stock,
+        //     'status' =>request()->status,
+        // ]);
+        $product = Product::create(request()->all());
+        dd($product);
     }
     public function show($product) 
     {
