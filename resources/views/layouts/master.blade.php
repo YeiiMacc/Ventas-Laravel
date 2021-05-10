@@ -7,6 +7,11 @@
     <title>Products</title>
 </head>
 <body>
+    @if (session()->has('error'))
+        <div class="alertalert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
     @yield('content')
 </body>
 </html>

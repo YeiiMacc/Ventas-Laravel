@@ -20,16 +20,29 @@ class ProductController extends Controller
         return view('products.create');
     }
     public function store() 
-    {
-        // $product = Product::create([
-        //     'title' => request()->title,
-        //     'description' =>request()->description,
-        //     'price' =>request()->price,
-        //     'stock' =>request()->stock,
-        //     'status' =>request()->status,
-        // ]);
+    {   
+        
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:available,unavailable'],
+        ];
+
+        request()->validate($rules);
+
+        if (request()->status == 'available' && request()->stock == 0) {
+            session()->flash('error', 'If available must have stock');
+
+            return redirect()
+            ->back()
+            ->withInput(request()->all());
+        }
+
+
         $product = Product::create(request()->all());
-        dd($product);
+        return redirect()->route('products.index');
     }
     public function show($product) 
     {
@@ -46,14 +59,24 @@ class ProductController extends Controller
     }
     public function update($product) 
     {
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:available,unavailable'],
+        ];
+
+        request()->validate($rules);
+        
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        dd($product);
+        return redirect()->route('products.index');
     }
     public function destroy($product) 
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        dd($product);
+        return redirect()->route('products.index');
     }
 }
