@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Create a products</h1>
+    <h1>Edit a products {{ $product->id }} - {{ $product->title }}</h1>
 
     <form action="{{ route('products.update', ['product' => $product->id]) }}" method="post">
         @csrf

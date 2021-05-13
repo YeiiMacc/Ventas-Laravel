@@ -19,6 +19,7 @@ class ProductController extends Controller
     {
         return view('products.create');
     }
+
     public function store() 
     {   
         
@@ -33,17 +34,22 @@ class ProductController extends Controller
         request()->validate($rules);
 
         if (request()->status == 'available' && request()->stock == 0) {
-            session()->flash('error', 'If available must have stock');
-
             return redirect()
             ->back()
-            ->withInput(request()->all());
+            ->withInput(request()->all())
+            ->withErrors('If available must have stock');
         }
 
 
         $product = Product::create(request()->all());
-        return redirect()->route('products.index');
+       
+        return redirect()
+            ->route('products.index')
+            ->withSuccess("The new product with id {$product->id} was created");
+            // ->with(['success' => "The new product with id {$product->id} was created"]);
+
     }
+
     public function show($product) 
     {
         $product = Product::findOrFail($product);
@@ -51,12 +57,14 @@ class ProductController extends Controller
             'product' => $product,
         ]);
     }
+
     public function edit($product) 
     {
         return view('products.edit')->with([
             'product' => Product::findoRFail($product),
         ]);
     }
+
     public function update($product) 
     {
         $rules = [
@@ -71,12 +79,17 @@ class ProductController extends Controller
         
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return redirect()->route('products.index');
+        return redirect()
+            ->route('products.index')
+            ->withSuccess("The product with id {$product->id} was edited");
     }
+
     public function destroy($product) 
     {
         $product = Product::findOrFail($product);
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()
+            ->route('products.index')
+            ->withSuccess("The product with id {$product->id} was deleted");
     }
 }
