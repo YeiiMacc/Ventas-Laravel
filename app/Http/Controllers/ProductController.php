@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,39 +26,17 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store() 
+    public function store(ProductRequest $request) 
     {   
-        
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:available,unavailable'],
-        ];
-
-        request()->validate($rules);
-
-        if (request()->status == 'available' && request()->stock == 0) {
-            return redirect()
-            ->back()
-            ->withInput(request()->all())
-            ->withErrors('If available must have stock');
-        }
-
-
-        $product = Product::create(request()->all());
+        $product = Product::create($request->validated());
        
         return redirect()
             ->route('products.index')
             ->withSuccess("The new product with id {$product->id} was created");
-            // ->with(['success' => "The new product with id {$product->id} was created"]);
-
     }
 
     public function show(Product $product) 
     {
-        // $product = Product::findOrFail($product);
         return view('products.show')->with([
             'product' => $product,
         ]);
@@ -70,18 +49,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Product $product) 
+    public function update(ProductRequest $request, Product $product) 
     {
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:available,unavailable'],
-        ];
-
-        request()->validate($rules);
-
         $product->update(request()->all());
 
         return redirect()
