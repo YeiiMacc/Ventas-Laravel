@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Product;
 
 class Image extends Model
 {
@@ -17,4 +19,9 @@ class Image extends Model
     protected $fillable = [
         'path',
     ];
+
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }

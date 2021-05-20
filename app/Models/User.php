@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Image;
 
 class User extends Authenticatable
 {
@@ -66,4 +67,8 @@ class User extends Authenticatable
         return $this->hasManyThrough(Payment::class, Order::class, 'customer_id');
     }
 
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }
