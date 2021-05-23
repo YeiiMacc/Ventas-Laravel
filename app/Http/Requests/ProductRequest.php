@@ -34,7 +34,7 @@ class ProductRequest extends FormRequest
         ];
     }
 
-    //Metodo para validar disponivilidad de productos
+    //Metodo para validar disponibilidad de productos
     public function withValidator($validator)
     {
         $validator->after(function($validator)
