@@ -9,8 +9,15 @@
       <li class="list-group-item">{{ $product->status}}</li>
       <li class="list-group-item">${{ $product->price}}</li>
     </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+    <div class="card-body text-center">
+      <form 
+        class="d-inline"
+        method="POST" 
+        action="{{ route('products.carts.store', ['product' => $product->id]) }}" 
+      >
+        @csrf
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+      </form>
+
     </div>
   </div>
