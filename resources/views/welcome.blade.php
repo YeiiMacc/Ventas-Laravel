@@ -7,9 +7,9 @@
               No products yet!         
             </div>
         @else
-            <div class="row">
+            <div class="row justify-content-center">
               @foreach ($products as $product)
-                <div class="col-3 mb-4">
+                <div class="col-10	col-sm-5	col-md-4	col-lg-4	col-xl-3 ">
 
                   @include('components.product-card')
 

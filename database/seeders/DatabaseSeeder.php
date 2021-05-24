@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::factory(20)
+        $users = User::factory(10)
         ->create()
         ->each(function ($user) {
             $image = Image::factory()
@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
                 $order->payment()->save($payment);
             });
 
-        $carts = Cart::factory(20)->create();
+        $carts = Cart::factory(10)->create();
 
-        $products = Product::factory(50)
+        $products = Product::factory(20)
             ->create()
             ->each(function ($product) use ($orders, $carts) {
                 $order = $orders->random();

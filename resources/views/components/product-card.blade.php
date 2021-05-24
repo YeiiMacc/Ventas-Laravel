@@ -1,5 +1,5 @@
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card">
+    <img class="card-img-top" src="{{ asset($product->images->first()->path) }}" alt="Card image cap" height="300">
     <div class="card-body">
       <h5 class="card-title">{{ $product->title}} ({{ $product->id}})</h5>
       <p class="card-text">- </p>
