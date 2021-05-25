@@ -10,14 +10,27 @@
       <li class="list-group-item">${{ $product->price}}</li>
     </ul>
     <div class="card-body text-center">
-      <form 
+
+      @if (isset($cart))
+        <form 
+        class="d-inline"
+        method="POST" 
+        action="{{ route('products.carts.destroy', ['cart' => $cart->id, 'product' => $product->id]) }}" 
+        >
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger">Remove from Cart</button>
+        </form>
+      @else
+        <form 
         class="d-inline"
         method="POST" 
         action="{{ route('products.carts.store', ['product' => $product->id]) }}" 
-      >
-        @csrf
-        <button type="submit" class="btn btn-primary">Add to Cart</button>
-      </form>
+        >
+          @csrf
+          <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>   
+      @endif
 
     </div>
   </div>
