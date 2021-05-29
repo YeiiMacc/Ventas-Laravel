@@ -4,6 +4,8 @@
            
         <h1>Order Details</h1>
         
+
+        
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-light">
@@ -25,12 +27,19 @@
                             <td>{{ $product->pivot->quantity }}</td>
                             <td>
                                 <strong>
-                                    {{ $product->pivot->quantity * $product->price}}
+                                    {{ $product->total}}
                                 </strong>
                             </td>
                         </tr>  
                     @endforeach
+                    
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right"><h5><strong>Order Total: </strong></h5></td>
+                        <td><h5><strong>$ {{ $cart->total }}</strong></h5></td>
+                    </tr>
+                </tfoot>                   
             </table>
         </div>
         

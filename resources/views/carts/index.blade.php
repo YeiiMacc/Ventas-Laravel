@@ -7,6 +7,7 @@
               Your cart is empty!         
             </div>
         @else
+            <h4 class="text-right">Your cart total: <strong>${{ $cart->total }}</strong></h4>
             <a href="{{ route('orders.create') }}" class="btn btn-success mb-3">
               Start Order
             </a>

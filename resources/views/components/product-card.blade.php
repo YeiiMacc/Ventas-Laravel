@@ -12,6 +12,11 @@
     <div class="card-body text-center">
 
       @if (isset($cart))
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ $product->pivot->quantity }} in your cart
+            <strong>(${{ $product->total }})</strong>
+          </li>
+        </ul>
         <form 
         class="d-inline"
         method="POST" 
