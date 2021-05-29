@@ -24,7 +24,7 @@ class CartController extends Controller
     public function index()
     {
         return view('carts.index')->with([
-            'cart' => $this->cartService->getFormCookieOrCreate(),
+            'cart' => $this->cartService->getFromCookie(),
         ]);
     }
 

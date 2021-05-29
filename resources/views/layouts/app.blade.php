@@ -46,7 +46,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('carts.index') }}">Cart</a>
+                            {{-- Injectar dependencia de CartServices --}}
+                            @inject('cartService', 'App\Services\CartService')
+                            <a class="nav-link" href="{{ route('carts.index') }}">
+                                Cart ({{ $cartService->countProducts() }})
+                            </a>
                         </li>
                         @guest
                             @if (Route::has('login'))

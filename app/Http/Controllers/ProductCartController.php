@@ -26,7 +26,7 @@ class ProductCartController extends Controller
      */
     public function store(Request $request, Product $product)
     {
-        $cart = $this->cartService->getFormCookieOrCreate();
+        $cart = $this->cartService->getFromCookieOrCreate();
 
         $quantity = $cart->products()
         ->find($product->id)
