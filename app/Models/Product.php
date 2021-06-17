@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Image;
+use App\Scopes\AvailableScope;
 
 class Product extends Model
 {
@@ -24,6 +25,16 @@ class Product extends Model
         'stock',
         'status',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new AvailableScope);
+    }
 
     public function carts()
     {
