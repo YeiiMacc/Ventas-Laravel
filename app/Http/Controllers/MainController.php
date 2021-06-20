@@ -11,6 +11,8 @@ class MainController extends Controller
     public function index()
     {
         \DB::connection()->enableQueryLog();
+        // Solucion a N+1 consultas
+        // $products = Product::with('images')->get();
         $products = Product::all();
 
         return view('welcome')->with([
