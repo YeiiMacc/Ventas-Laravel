@@ -1,5 +1,27 @@
   <div class="card">
-    <img class="card-img-top" src="{{ asset($product->images->first()->path) }}" alt="Card image cap" height="300">
+    
+    <div id="carousel{{ $product->id }}" class="carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+        @foreach ($product->images as $image)
+          <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+
+            <img class="d-block w-100 card-img-top" src="{{ asset($image->path) }}" height="300">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Title</h5>
+              <p>Text</p>
+            </div>
+          </div> 
+        @endforeach         
+      </div>
+      <a class="carousel-control-prev" href="#carousel{{ $product->id }}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>        
+      </a>
+
+      <a class="carousel-control-next" href="#carousel{{ $product->id }}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>        
+      </a>
+    </div>
+
     <div class="card-body">
       <h5 class="card-title">{{ $product->title}} ({{ $product->id}})</h5>
       <p class="card-text">- </p>
