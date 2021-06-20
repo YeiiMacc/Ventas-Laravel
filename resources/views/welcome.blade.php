@@ -7,6 +7,7 @@
               No products yet!         
             </div>
         @else
+          @dump($products)
             <div class="row justify-content-center">
               @foreach ($products as $product)
                 <div class="col-10	col-sm-5	col-md-4	col-lg-4	col-xl-3 ">
@@ -16,6 +17,11 @@
                 </div>       
               @endforeach    
             </div>
+
+          @dump($products)
+
+          @dd(\DB::getQueryLog())
+
         @endempty
 @endsection
 
