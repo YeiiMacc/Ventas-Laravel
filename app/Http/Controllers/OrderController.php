@@ -62,6 +62,15 @@ class OrderController extends Controller
                 ->mapWithKeys(function ($product){
                     $element[$product->id] = ['quantity' => $product->pivot->quantity];
 
+                    $quantity = $product->pivot->quantity;
+                    if ($product->stock < $quantity) {
+                        throw ValidationException::withMessages([
+                            'product' => "There is not enough stock for the quantity you required of {$product->title}"
+                        ]);
+                    }
+
+                    $product->decrement('stock', $quantity);
+
                     return $element;
                 });
 
