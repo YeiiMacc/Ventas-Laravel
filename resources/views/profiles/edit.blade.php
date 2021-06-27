@@ -12,7 +12,17 @@
                     enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
+                        
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center">
+                                <img 
+                                        src="{{ asset(Auth::user()->profile_image) }}" 
+                                        alt="{{ Auth::user()->name }}"
+                                        class="rounded-circle"
+                                        width="180"
+                                        height="180">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
