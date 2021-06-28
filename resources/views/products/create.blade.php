@@ -3,8 +3,12 @@
 @section('content')
     <h1>Create a products</h1>
 
-    <form action="{{ route('products.store') }}" method="post">
+    <form 
+        action="{{ route('products.store') }}" 
+        method="post"
+        enctype="multipart/form-data">
         @csrf
+
         <div class="form-row">
             <label>Title</label>
             <input type="text" name="title" id="" class="form-control" 
@@ -35,6 +39,18 @@
                     value="unavailable">Unavailable</option>
             </select>
         </div>
+
+        <div class="form-row">
+            <label>
+                {{ __('Images') }}
+            </label>
+           
+            <div class="custom-file">
+                <input id="images" class="custom-file-input" type="file" accept="image/*" name="images[]" multiple>
+                <label for="images" class="custom-file-label">{{ __('Product Images') }}</label>
+            </div>             
+        </div>
+
         <div class="form-row">
             <button type="submit" class="btn btn-primary btn-lg">Create Product</button>
         </div>
