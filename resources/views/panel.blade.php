@@ -13,6 +13,9 @@
                         <a href="{{ route('products.index') }}" class="list-group-item">
                            Manage products 
                         </a>
+                        <a href="{{ route('users.index') }}" class="list-group-item">
+                            Manage users 
+                        </a>
                     </div>
                 </div>
             </div>
