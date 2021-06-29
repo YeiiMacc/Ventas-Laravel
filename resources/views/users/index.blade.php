@@ -32,7 +32,7 @@
                                 <td>
                                     <form action="{{ route('users.admin.toggle', ['user' => $user->id]) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-link">
+                                        <button type="submit" class="btn {{ $user->isAdmin() ? 'btn-danger' : 'btn-success' }}">
                                             {{ $user->isAdmin() ? 'Remove' : 'Make' }}
                                             Admin
                                         </button>
