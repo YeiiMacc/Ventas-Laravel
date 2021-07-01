@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->call(function() {
-             \Log::debug('From Schedule');
-        })->everyMinute();
+        //  $schedule->call(function() {
+        //      \Log::debug('From Schedule');
+        // })->everyMinute();
 
         $schedule->command('carts:remove-old')->daily();
         // $schedule->command('carts:remove-old')->everyMinute();
